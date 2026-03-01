@@ -35,14 +35,14 @@ export function TokenUsageChart() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600"></div>
       </div>
     );
   }
 
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400">
+      <div className="flex items-center justify-center h-64 text-gray-600 text-sm">
         No token usage data yet. Data will appear as you use OpenClaw.
       </div>
     );
@@ -58,23 +58,25 @@ export function TokenUsageChart() {
     <div className="h-64">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
           <XAxis 
             dataKey="time" 
-            stroke="#9CA3AF"
-            style={{ fontSize: '12px' }}
+            stroke="#666"
+            style={{ fontSize: '11px' }}
+            tick={{ fill: '#666' }}
           />
           <YAxis 
-            stroke="#9CA3AF"
-            style={{ fontSize: '12px' }}
-            label={{ value: 'Tokens (K)', angle: -90, position: 'insideLeft', style: { fill: '#9CA3AF' } }}
+            stroke="#666"
+            style={{ fontSize: '11px' }}
+            tick={{ fill: '#666' }}
+            label={{ value: 'Tokens (K)', angle: -90, position: 'insideLeft', style: { fill: '#666' } }}
           />
           <Tooltip 
             contentStyle={{ 
-              backgroundColor: '#1F2937', 
-              border: '1px solid #374151',
-              borderRadius: '8px',
-              color: '#F9FAFB'
+              backgroundColor: '#1a1a1a', 
+              border: '1px solid #262626',
+              borderRadius: '6px',
+              color: '#e5e5e5'
             }}
             formatter={(value: any, name: any) => {
               if (!value) return ['', ''];
@@ -85,9 +87,9 @@ export function TokenUsageChart() {
           <Line 
             type="monotone" 
             dataKey="tokens" 
-            stroke="#3B82F6" 
+            stroke="#22c55e" 
             strokeWidth={2}
-            dot={{ fill: '#3B82F6', r: 3 }}
+            dot={{ fill: '#22c55e', r: 2 }}
           />
         </LineChart>
       </ResponsiveContainer>
