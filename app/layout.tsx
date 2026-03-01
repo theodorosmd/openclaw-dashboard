@@ -13,9 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className="antialiased">
-        <div className="flex h-screen bg-[#0a0a0a]">
+    <html lang="en" className="dark" style={{ backgroundColor: '#0a0a0a' }}>
+      <body className="antialiased" style={{ backgroundColor: '#0a0a0a', color: '#ffffff', margin: 0, padding: 0 }}>
+        <div className="flex h-screen bg-[#0a0a0a]" style={{ display: 'flex', height: '100vh', backgroundColor: '#0a0a0a' }}>
           {/* Sidebar */}
           <aside className="w-64 bg-[#1a1a1a] border-r border-[#262626]">
             <div className="p-6 border-b border-[#262626]">
