@@ -26,11 +26,13 @@ export default function RootLayout({
             <nav className="px-4 space-y-1">
               <NavLink href="/" icon="📊">System</NavLink>
               <NavLink href="/activity" icon="📝">Activity Feed</NavLink>
+              <NavLink href="/cron" icon="⏰">Cron Jobs</NavLink>
               <NavLink href="/calendar" icon="📅">Calendar</NavLink>
               <NavLink href="/search" icon="🔍">Search</NavLink>
               <NavLink href="/memory" icon="🧠">Memory</NavLink>
               <NavLink href="/prompts" icon="✏️">Prompts</NavLink>
               <NavLink href="/skills" icon="🛠️">Skills</NavLink>
+              <NavLink href="/settings" icon="⚙️">Settings</NavLink>
             </nav>
           </aside>
 
