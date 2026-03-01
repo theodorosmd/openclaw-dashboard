@@ -71,6 +71,29 @@ Visual token tracking:
 - Auto-tracked every page load
 - Shows usage trends
 
+### 10. Cron Job Manager ⏰
+Full CRUD interface for scheduled tasks:
+- Create new cron jobs with form
+- Edit existing jobs
+- Delete with confirmation
+- Visual cron schedule examples
+- Activity logging for all operations
+
+### 11. Backup & Export 📦
+Download your entire workspace:
+- One-click ZIP download
+- Workspace stats (size, file count)
+- Excludes build artifacts
+- Timestamped backups
+
+### 12. Settings Page ⚙️
+Configure dashboard behavior:
+- Auto-refresh interval (1-300 seconds)
+- Theme selection (auto/light/dark)
+- Settings persist in localStorage
+- Clear historical data (activity/tokens)
+- Danger zone with confirmations
+
 ## Development
 
 ```bash
