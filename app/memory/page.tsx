@@ -1,5 +1,6 @@
 import { activityLogger } from "@/lib/activity-logger";
 import fs from 'fs/promises';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,7 +9,15 @@ export default async function Memory() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-8">Memory Browser</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Memory Browser</h1>
+        <Link
+          href="/memory/edit"
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          ✏️ Edit Memory
+        </Link>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">

@@ -29,6 +29,7 @@ export default function RootLayout({
               <NavLink href="/calendar" icon="📅">Calendar</NavLink>
               <NavLink href="/search" icon="🔍">Search</NavLink>
               <NavLink href="/memory" icon="🧠">Memory</NavLink>
+              <NavLink href="/prompts" icon="✏️">Prompts</NavLink>
               <NavLink href="/skills" icon="🛠️">Skills</NavLink>
             </nav>
           </aside>

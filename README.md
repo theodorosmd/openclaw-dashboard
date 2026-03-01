@@ -43,8 +43,33 @@ Real-time monitoring:
 - Gateway status
 - Uptime tracking
 - Active sessions
-- Token usage
+- Token usage with 24h graph
 - Current model
+- Auto-refreshes every 5 seconds
+
+### 7. Memory Editor ✏️
+Edit memory files directly from the UI:
+- MEMORY.md (long-term memory)
+- Daily logs
+- Live editing with save
+- Character/line count
+- Keyboard shortcuts (Ctrl/Cmd + S)
+
+### 8. Prompt Templates ✨
+Edit system prompts from the dashboard:
+- SOUL.md (personality)
+- AGENTS.md (guidelines)
+- HEARTBEAT.md (periodic tasks)
+- TOOLS.md (local notes)
+- USER.md (about your human)
+- IDENTITY.md (who you are)
+
+### 9. Token Usage Graphs 📈
+Visual token tracking:
+- 24-hour history chart
+- Real-time updates
+- Auto-tracked every page load
+- Shows usage trends
 
 ## Development
 

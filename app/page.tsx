@@ -1,8 +1,21 @@
 import { openclaw } from "@/lib/openclaw";
 import { AutoRefresh } from "@/components/AutoRefresh";
+import { TokenUsageChart } from "@/components/TokenUsageChart";
+import { tokenTracker } from "@/lib/token-tracker";
 
 export default async function Home() {
   const status = await openclaw.getStatus();
+  
+  // Track token usage
+  if (status.tokenUsage) {
+    await tokenTracker.track({
+      used: status.tokenUsage.used,
+      total: status.tokenUsage.total,
+      percentage: (status.tokenUsage.used / status.tokenUsage.total) * 100,
+      sessions: status.sessions,
+      model: status.model,
+    });
+  }
 
   return (
     <div className="p-8">
@@ -27,7 +40,7 @@ export default async function Home() {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <Card title="Current Model">
           <p className="text-2xl font-mono">{status.model}</p>
         </Card>
@@ -53,6 +66,10 @@ export default async function Home() {
           </div>
         </Card>
       </div>
+
+      <Card title="Token Usage (Last 24h)">
+        <TokenUsageChart />
+      </Card>
     </div>
   );
 }
