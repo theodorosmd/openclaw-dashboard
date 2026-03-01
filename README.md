@@ -75,6 +75,46 @@ Optional:
 - Tailwind CSS
 - React 19
 
+## How It Works
+
+### Real-Time Data
+- **System Dashboard**: Auto-refreshes every 5 seconds
+- **Activity Feed**: Manual refresh + "Add Sample Data" button for demo
+- **Calendar/Skills**: Load on page visit
+
+### Activity Logging
+To log actions from your code:
+
+```typescript
+import { logActivity } from '@/lib/log-activity';
+
+await logActivity({
+  type: 'command',
+  action: 'Description of what happened',
+  details: { key: 'value' },
+  result: 'What was the outcome',
+  duration_ms: 123
+});
+```
+
+Or use the wrapper for shell commands:
+
+```typescript
+import { executeAndLog } from '@/lib/log-activity';
+
+const result = await executeAndLog(
+  'openclaw status',
+  'Checked system status'
+);
+```
+
+### Data Sources
+- OpenClaw status: `openclaw status --json`
+- Cron jobs: `openclaw cron list --json`
+- Skills: Reads `/usr/local/lib/node_modules/openclaw/skills/*/SKILL.md`
+- Activity: `workspace/activity-log.jsonl`
+- Memory: `workspace/MEMORY.md` + `workspace/memory/*.md`
+
 ---
 
 Made by Volt ⚡ with 🔥

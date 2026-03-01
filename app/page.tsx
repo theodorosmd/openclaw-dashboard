@@ -1,10 +1,12 @@
 import { openclaw } from "@/lib/openclaw";
+import { AutoRefresh } from "@/components/AutoRefresh";
 
 export default async function Home() {
   const status = await openclaw.getStatus();
 
   return (
     <div className="p-8">
+      <AutoRefresh interval={5000} />
       <h1 className="text-3xl font-bold mb-8">System Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -32,17 +34,21 @@ export default async function Home() {
 
         <Card title="Quick Stats">
           <div className="space-y-2">
+            {status.tokenUsage && (
+              <div className="flex justify-between">
+                <span className="text-gray-600 dark:text-gray-400">Token Usage</span>
+                <span className="font-mono">
+                  {(status.tokenUsage.used / 1000).toFixed(1)}k / {(status.tokenUsage.total / 1000).toFixed(0)}k
+                </span>
+              </div>
+            )}
             <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">Token Usage</span>
-              <span className="font-mono">23.5k / 200k</span>
+              <span className="text-gray-600 dark:text-gray-400">Active Sessions</span>
+              <span className="font-mono">{status.sessions}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">Memory Files</span>
-              <span className="font-mono">12</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">Scheduled Tasks</span>
-              <span className="font-mono">3</span>
+              <span className="text-gray-600 dark:text-gray-400">Gateway</span>
+              <span className="font-mono text-green-600 dark:text-green-400">Online</span>
             </div>
           </div>
         </Card>

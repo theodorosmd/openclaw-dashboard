@@ -1,21 +1,9 @@
+import { openclaw } from "@/lib/openclaw";
+
 export const dynamic = 'force-dynamic';
 
 export default async function Skills() {
-  // Mock data - will implement ClawHub API integration
-  const installedSkills = [
-    {
-      name: 'weather',
-      version: '1.0.0',
-      description: 'Get weather forecasts via wttr.in',
-      location: '/usr/local/lib/node_modules/openclaw/skills/weather',
-    },
-    {
-      name: 'healthcheck',
-      version: '1.0.0',
-      description: 'Host security hardening and risk-tolerance configuration',
-      location: '/usr/local/lib/node_modules/openclaw/skills/healthcheck',
-    },
-  ];
+  const installedSkills = await openclaw.getSkills();
 
   return (
     <div className="p-8">

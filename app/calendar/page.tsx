@@ -1,9 +1,16 @@
 import { openclaw } from "@/lib/openclaw";
+import { jobRunsOnDate, getNextRunTime } from "@/lib/cron-parser";
 
 export const dynamic = 'force-dynamic';
 
 export default async function Calendar() {
   const cronJobs = await openclaw.getCronJobs();
+  
+  // Calculate next run times
+  const jobsWithNextRun = cronJobs.map(job => ({
+    ...job,
+    nextRun: job.nextRun || getNextRunTime(job.schedule)?.toISOString() || '',
+  }));
 
   // Generate next 7 days
   const weekDays = Array.from({ length: 7 }, (_, i) => {
@@ -18,13 +25,13 @@ export default async function Calendar() {
 
       <div className="grid grid-cols-7 gap-4">
         {weekDays.map((date) => (
-          <DayColumn key={date.toISOString()} date={date} cronJobs={cronJobs} />
+          <DayColumn key={date.toISOString()} date={date} cronJobs={jobsWithNextRun} />
         ))}
       </div>
 
       <div className="mt-8">
         <h2 className="text-xl font-bold mb-4">All Scheduled Jobs</h2>
-        {cronJobs.length === 0 ? (
+        {jobsWithNextRun.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
             <p className="text-gray-500 dark:text-gray-400">
               No scheduled tasks yet. Use `openclaw cron add` to create one.
@@ -32,7 +39,7 @@ export default async function Calendar() {
           </div>
         ) : (
           <div className="space-y-3">
-            {cronJobs.map((job) => (
+            {jobsWithNextRun.map((job) => (
               <CronJobCard key={job.id} job={job} />
             ))}
           </div>
@@ -46,8 +53,10 @@ function DayColumn({ date, cronJobs }: { date: Date; cronJobs: any[] }) {
   const isToday = date.toDateString() === new Date().toDateString();
   
   const tasksOnThisDay = cronJobs.filter((job) => {
-    // Simple check - in real implementation, parse cron schedule
-    return job.nextRun && new Date(job.nextRun).toDateString() === date.toDateString();
+    if (job.nextRun) {
+      return new Date(job.nextRun).toDateString() === date.toDateString();
+    }
+    return jobRunsOnDate(job.schedule, date);
   });
 
   return (

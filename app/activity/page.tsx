@@ -1,4 +1,6 @@
 import { activityLogger } from "@/lib/activity-logger";
+import { RefreshButton } from "@/components/RefreshButton";
+import { seedActivities } from "./actions";
 
 export const dynamic = 'force-dynamic';
 
@@ -8,10 +10,25 @@ export default async function ActivityFeed() {
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Activity Feed</h1>
-        <p className="text-sm text-gray-500">
-          Real-time log of every action Volt takes
-        </p>
+        <div>
+          <h1 className="text-3xl font-bold">Activity Feed</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Real-time log of every action Volt takes
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <RefreshButton />
+          {activities.length === 0 && (
+            <form action={seedActivities}>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+              >
+                Add Sample Data
+              </button>
+            </form>
+          )}
+        </div>
       </div>
 
       {activities.length === 0 ? (
